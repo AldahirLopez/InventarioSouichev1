@@ -13,11 +13,7 @@
                 
             
                         @can('crear-obras')
-                        <a class="btn btn-warning" href="{{ route('productos.create') }}">Nuevo</a>
-                        @endcan
-
-                        @can('crear-obras')
-                        <a class="btn btn-warning" href="{{ route('productos.create') }}">Reporte</a>
+                        <a class="btn btn-warning" href="{{ route('obras.create') }}">Nuevo</a>
                         @endcan
 
                         <table class="table table-striped mt-2">

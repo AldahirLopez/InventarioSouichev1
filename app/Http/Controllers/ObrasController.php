@@ -25,7 +25,7 @@ class ObrasController extends Controller
      */
     public function create()
     {
-        //
+        return view('obras.crear');
     }
 
     /**
