@@ -14,8 +14,8 @@ class ObrasController extends Controller
      */
     public function index()
     {
-       $obras = Obras::paginate(5);
-       return view('obras.index', compact('obras'));
+        $obras = Obras::paginate(5);
+        return view('obras.index', compact('obras'));
     }
 
     /**
@@ -36,7 +36,26 @@ class ObrasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required',
+            'direccion' => 'required',
+            'estacionservicio' => 'required',
+        ]);
+
+        // Crear una nueva instancia del modelo Obras
+        $obra = new Obras();
+
+        // Establecer los valores de los campos
+        $obra->nombre = $request->nombre;
+        $obra->direccion = $request->direccion;
+        $obra->estacionservicio = $request->estacionservicio;
+
+        // Guardar la nueva entrada en la base de datos
+        $obra->save();
+
+        $obras = Obras::paginate(5);
+        return view('obras.index', compact('obras'));
     }
 
     /**
@@ -58,7 +77,11 @@ class ObrasController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Busca la obra por su ID
+        $obra = Obras::findOrFail($id);
+
+        // Retorna la vista del formulario de edición con los datos de la obra
+        return view('obras.editar', compact('obra'));
     }
 
     /**
@@ -70,7 +93,27 @@ class ObrasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $obra = Obras::findOrFail($id);
+
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required',
+            'direccion' => 'required',
+            'estacionservicio' => 'required',
+        ]);
+    
+        // Actualizar los valores de los campos
+        $obra->nombre = $request->nombre;
+        $obra->direccion = $request->direccion;
+        $obra->estacionservicio = $request->estacionservicio;
+    
+        // Guardar los cambios en la base de datos
+        $obra->save();
+    
+        // Redirigir a la vista de índice de obras (o a donde desees después de la actualización)
+        $obras = Obras::paginate(5);
+        return view('obras.index', compact('obras'));
+    
     }
 
     /**

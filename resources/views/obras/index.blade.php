@@ -21,21 +21,20 @@
                                     <th style="display: none;">ID</th>
                                     <th style="color:#fff;">Nombre</th>
                                     <th style="color:#fff;">Direccion</th>  
-                                    <th style="color:#fff;">NEstacion</th>                                                                  
+                                    <th style="color:#fff;">N. Estacion</th> 
+                                    <th style="color:#fff;">Acciones</th>                                                                   
                               </thead>
                               <tbody>
                               @foreach ($obras as $obra)
                             <tr>
                                 <td style="display: none;">{{ $obra->id }}</td>                                
                                 <td>{{ $obra->nombre }}</td>
-                                <td>{{ $obra->categoria }}</td>
-                                <td>{{ $obra->cantidad }}</td>
-                                <td>{{ $obra->precio }}</td>
-                                <td>{{ $obra->descripcion }}</td>
+                                <td>{{ $obra->direccion }}</td>
+                                <td>{{ $obra->estacionservicio }}</td>
                                 <td>
-                                    <form action="{{ route('productos.destroy',$producto->id) }}" method="POST">                                        
+                                    <form action="{{ route('obras.destroy',$obra->id) }}" method="POST">                                        
                                         @can('editar-obras')
-                                        <a class="btn btn-info" href="{{ route('productos.edit',$producto->id) }}">Editar</a>
+                                        <a class="btn btn-info" href="{{ route('obras.edit',$obra->id) }}">Editar</a>
                                         @endcan
 
                                         @csrf

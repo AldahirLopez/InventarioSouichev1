@@ -32,8 +32,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('productos/listar_inventario', [App\Http\Controllers\ProductosController::class, 'listar'])->name('productos.listar_inventario');
-
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);

@@ -9,4 +9,6 @@ class Obras extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre','direccion','estacionservicio'];
+
 }
+

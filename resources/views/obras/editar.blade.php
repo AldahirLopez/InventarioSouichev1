@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Agregar una Obra</h3>
+            <h3 class="page__heading">Editar una Obra</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -23,31 +23,32 @@
                             </div>
                         @endif
 
-                    <form action="{{ route('obras.store') }}" method="POST">
+                    <form action="{{ route('obras.update', $obra->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                    <label for="nombre">Nombre</label>
-                                   <input type="text" name="nombre" class="form-control">
+                                   <input type="text" name="nombre" class="form-control" value="{{ $obra->nombre }}">
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                    <label for="direccion">Direccion</label>
-                                   <input type="text" name="direccion" class="form-control">
+                                   <input type="text" name="direccion" class="form-control" value="{{ $obra->direccion }}">
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                    <label for="estacionservicio">Numero Estacion</label>
-                                   <input type="text" name="estacionservicio" class="form-control">
+                                   <input type="text" name="estacionservicio" class="form-control" value="{{ $obra->estacionservicio }}">
                                 </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Guardar</button>                            
+                            <button type="submit" class="btn btn-primary">Actualizar</button>                            
                          </div>
                         </div>
                     </form>
