@@ -30,4 +30,8 @@
     <a class="nav-link {{ Request::is('roles') ? 'active' : '' }} " href="/roles">
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a> 
+
+    <a class="nav-link {{ Request::is('roles') ? 'active' : '' }} " href="/obras-info">
+        <i class=" fas fa-user-lock"></i><span>Informacion Estacion</span>
+    </a> 
 </li>

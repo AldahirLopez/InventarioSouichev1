@@ -8,6 +8,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ObrasController;
+use App\Http\Controllers\ObrasInfoController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\SalidasController;
 use App\Http\Controllers\EntradasController;
@@ -37,6 +38,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('productos', ProductosController::class);
     Route::resource('obras', ObrasController::class);
+    Route::resource('obras-info', ObrasInfoController::class);
     Route::resource('salidas', SalidasController::class);
     Route::resource('categorias', CategoriasController::class);
     Route::resource('entradas', EntradasController::class);

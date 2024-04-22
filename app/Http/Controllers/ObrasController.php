@@ -124,6 +124,14 @@ class ObrasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Buscar la obra por su ID
+        $obra = Obras::findOrFail($id);
+    
+        // Eliminar la obra
+        $obra->delete();
+    
+        // Redirigir a la vista de índice de obras (o a donde desees después de la eliminación)
+        $obras = Obras::paginate(5);
+        return view('obras.index', compact('obras'));
     }
 }

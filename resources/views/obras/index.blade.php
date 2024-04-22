@@ -22,6 +22,7 @@
                                     <th style="color:#fff;">Nombre</th>
                                     <th style="color:#fff;">Direccion</th>  
                                     <th style="color:#fff;">N. Estacion</th> 
+                                    <th style="color:#fff;">Informacion</th> 
                                     <th style="color:#fff;">Acciones</th>                                                                   
                               </thead>
                               <tbody>
@@ -31,6 +32,7 @@
                                 <td>{{ $obra->nombre }}</td>
                                 <td>{{ $obra->direccion }}</td>
                                 <td>{{ $obra->estacionservicio }}</td>
+                                <td></td>
                                 <td>
                                     <form action="{{ route('obras.destroy',$obra->id) }}" method="POST">                                        
                                         @can('editar-obras')
