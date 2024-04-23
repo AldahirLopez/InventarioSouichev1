@@ -13,13 +13,12 @@ class PlanosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $planos = Planos::paginate(5);
-        return view('planos.index', compact('planos'));
+        $planos = Planos::where('obra_id', $request->obra_id)->paginate(5);
+        $obra = Obras::findOrFail($request->obra_id); // Obtener la obra relacionada con los planos
+        return view('planos.index', compact('planos', 'obra'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -52,28 +51,25 @@ class PlanosController extends Controller
             'archivo' => 'required|file', // Validar que se haya subido un archivo
         ]);
 
-        // Obtener el archivo subido
-        $archivoSubido = $request->file('archivo');
-
-        // Leer el contenido del archivo y convertirlo a base64
-        $contenidoArchivo = base64_encode(file_get_contents($archivoSubido->getRealPath()));
-
         // Crear una nueva instancia del modelo Planos
         $plano = new Planos();
 
         // Establecer los valores de los campos
-        $plano->usuario_id = $usuarioId; // Asignar el ID del usuario
-        $plano->obra_id = $obraId; // Asignar el ID de la obra
+        $plano->usuario_id = auth()->id(); // Obtener el ID del usuario autenticado
+        $plano->obra_id = $request->obra_id; // Obtener el ID de la obra de la solicitud
         $plano->nombre = $request->nombre;
         $plano->descripcion = $request->descripcion;
-        $plano->plano = $contenidoArchivo; // Guardar el contenido del archivo en la base de datos
+
+        // Guardar el archivo en el sistema de archivos
+        $archivoSubido = $request->file('archivo');
+        $rutaArchivo = $archivoSubido->store('public/archivos');
+        $plano->rutaplano = str_replace('public/', '', $rutaArchivo); // Guardar la ruta del archivo en la base de datos
 
         // Guardar la nueva entrada en la base de datos
         $plano->save();
 
-        $obra = Obras::findOrFail($obraId);
-        $planos = Planos::paginate(5);
-        return view('planos.index', compact('planos'), ['obra' => $obra]);
+        // Redirigir al usuario a la página de lista de planos
+        return redirect()->route('planos.index', ['obra_id' => $request->obra_id])->with('success', 'Plano creado exitosamente');
     }
 
     /**
@@ -84,9 +80,6 @@ class PlanosController extends Controller
      */
     public function show($id)
     {
-        $obra = Obras::findOrFail($id); // Obtener la obra por su ID
-        $planos = Planos::paginate(5);
-        return view('planos.index', compact('planos'), ['obra' => $obra]);
     }
 
     /**
@@ -124,11 +117,11 @@ class PlanosController extends Controller
     {
         // Decodificar el contenido base64 del PDF
         $contenidoPDFDecodificado = base64_decode($contenidoPDF);
-        
+
         // Guardar el contenido del PDF en un archivo temporal
         $archivoTemporal = tempnam(sys_get_temp_dir(), 'pdf');
         file_put_contents($archivoTemporal, $contenidoPDFDecodificado);
-        
+
         // Devolver el archivo PDF
         return response()->file($archivoTemporal);
     }

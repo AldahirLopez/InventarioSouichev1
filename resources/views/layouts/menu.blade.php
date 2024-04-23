@@ -11,13 +11,6 @@
     <i class="fas fa-bars"></i><span>Categorias</span>
     </a>
 
-    <a class="nav-link {{ Request::is('entradas') ? 'active' : '' }}" href="/entradas">
-    <i class="fas fa-truck-ramp-box"></i><span>Entradas de material</span>
-    </a>
-
-    <a class="nav-link {{ Request::is('salidas') ? 'active' : '' }}" href="/salidas">
-    <i class="fas fa-truck-moving"></i></i><span>Salidas de material</span>
-    </a>
 
     <a class="nav-link {{ Request::is('obras') ? 'active' : '' }}" href="/obras">
         <i class="fas fa-building"></i><span>Obras</span>     
@@ -31,7 +24,4 @@
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a> 
 
-    <a class="nav-link {{ Request::is('roles') ? 'active' : '' }} " href="/obras-info">
-        <i class=" fas fa-user-lock"></i><span>Informacion Estacion</span>
-    </a> 
 </li>

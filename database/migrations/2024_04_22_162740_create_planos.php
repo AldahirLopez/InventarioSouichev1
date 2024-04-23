@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('obra_id'); // Agregar columna obra_id
             $table->string('nombre');
-            $table->binary('plano', 16777215);
+            $table->string('rutaplano');
             $table->string('descripcion');
             $table->unsignedBigInteger('usuario_id'); // Agregar columna usuario_id
             $table->timestamps();

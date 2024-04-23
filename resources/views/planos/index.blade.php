@@ -6,6 +6,12 @@
         <h3 class="page__heading">Planos de la obra {{ $obra->nombre }}</h3>
     </div>
     <div class="section-body">
+        <!-- Agregar el código para mostrar el mensaje de éxito aquí -->
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -32,11 +38,11 @@
                                     <td style="display: none;">{{ $plano->id }}</td>
                                     <td>{{ $plano->nombre }}</td>
                                     <td>
-                                        <button onclick="mostrarPDF('{{ base64_encode($plano->plano) }}')">Mostrar PDF</button>
+                                        <button onclick="mostrarPDF('{{ $plano->rutaplano }}')">Mostrar PDF</button>
                                     </td>
-
-
                                     <td>{{ $plano->descripcion }}</td>
+                                    <td></td>
+                                    <td></td>
                                     <td>
                                         <form action="{{ route('planos.destroy',$plano->id) }}" method="POST">
                                             @can('editar-planos')
@@ -57,7 +63,7 @@
 
                         <!-- Ubicamos la paginacion a la derecha -->
                         <div class="pagination justify-content-end">
-                            {!! $planos->links() !!}
+                            {!! $planos->appends(['obra_id' => $obra->id])->links() !!}
                         </div>
                     </div>
                 </div>
@@ -67,24 +73,10 @@
 </section>
 @endsection
 <script>
-    function mostrarPDF(contenidoPDF) {
+    function mostrarPDF(rutaArchivo) {
         try {
-            // Decodificar el contenido base64 del PDF
-            var contenidoPDFDecodificado = atob(contenidoPDF);
-            console.log("Contenido del PDF decodificado:", contenidoPDFDecodificado);
-
-            // Convertir la cadena a un array de bytes
-            var bytes = new Uint8Array(contenidoPDFDecodificado.length);
-            for (var i = 0; i < contenidoPDFDecodificado.length; i++) {
-                bytes[i] = contenidoPDFDecodificado.charCodeAt(i);
-            }
-
-            // Crear un objeto Blob a partir del array de bytes
-            var blob = new Blob([bytes], { type: 'application/pdf' });
-
-            // Crear una URL del objeto Blob
-            var url = URL.createObjectURL(blob);
-            console.log("URL del objeto BLOB:", url);
+            // Construir la URL del archivo PDF
+            var url = '/storage/' + rutaArchivo;
 
             // Abrir una nueva ventana o pestaña y cargar el PDF
             window.open(url, '_blank');

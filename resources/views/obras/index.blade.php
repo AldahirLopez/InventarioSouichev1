@@ -31,8 +31,9 @@
                                     <td>{{ $obra->nombre }}</td>
                                     <td>{{ $obra->direccion }}</td>
                                     <td>
-                                        <form action="{{ route('obras-info.show', $obra->id) }}" method="GET">
+                                        <form action="{{ route('obras-info.index') }}" method="GET">
                                             @csrf
+                                            <input type="hidden" name="id" value="{{ $obra->id }}">
                                             <button type="submit" class="btn btn-info">Ver Detalles</button>
                                         </form>
                                     </td>

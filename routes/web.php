@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('categorias', CategoriasController::class);
     Route::resource('entradas', EntradasController::class);
     Route::resource('planos', PlanosController::class);
+   
+
 });
 
 

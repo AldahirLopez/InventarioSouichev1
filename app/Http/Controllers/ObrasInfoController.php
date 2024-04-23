@@ -12,9 +12,10 @@ class ObrasInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $obra = Obras::findOrFail($id); // Obtener la obra por su ID
+        $id = request('id');
+        $obra = Obras::findOrFail($id);
         return view('obras-info.index', ['obra' => $obra]);
     }
 
@@ -25,7 +26,7 @@ class ObrasInfoController extends Controller
      */
     public function create()
     {
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.
@@ -45,8 +46,6 @@ class ObrasInfoController extends Controller
      */
     public function show($id)
     {
-        $obra = Obras::findOrFail($id);
-        return view('obras-info.index', compact('obra'));
     }
 
     /**
@@ -56,7 +55,7 @@ class ObrasInfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { 
     }
 
     /**
