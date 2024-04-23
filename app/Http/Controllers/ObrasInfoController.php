@@ -12,11 +12,10 @@ class ObrasInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $obras = Obras::paginate(5);
-        return view('obras-info.index', compact('obras'));
-
+        $obra = Obras::findOrFail($id); // Obtener la obra por su ID
+        return view('obras-info.index', ['obra' => $obra]);
     }
 
     /**
@@ -26,7 +25,6 @@ class ObrasInfoController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -37,7 +35,6 @@ class ObrasInfoController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -48,7 +45,8 @@ class ObrasInfoController extends Controller
      */
     public function show($id)
     {
-        //
+        $obra = Obras::findOrFail($id);
+        return view('obras-info.index', compact('obra'));
     }
 
     /**
@@ -59,7 +57,6 @@ class ObrasInfoController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -71,8 +68,6 @@ class ObrasInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-    
     }
 
     /**
@@ -83,6 +78,5 @@ class ObrasInfoController extends Controller
      */
     public function destroy($id)
     {
-
     }
 }

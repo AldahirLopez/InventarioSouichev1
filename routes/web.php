@@ -12,6 +12,7 @@ use App\Http\Controllers\ObrasInfoController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\SalidasController;
 use App\Http\Controllers\EntradasController;
+use App\Http\Controllers\PlanosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/mostrar-pdf/{contenidoPDF}', 'PlanoController@mostrarPDF')->name('mostrar-pdf');
+
+
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);
@@ -42,7 +46,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('salidas', SalidasController::class);
     Route::resource('categorias', CategoriasController::class);
     Route::resource('entradas', EntradasController::class);
-    
+    Route::resource('planos', PlanosController::class);
 });
 
 
