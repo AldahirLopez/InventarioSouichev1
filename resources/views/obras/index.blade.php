@@ -6,6 +6,7 @@
         <h3 class="page__heading">Obras</h3>
     </div>
     <div class="section-body">
+    @include('layouts.bannernotification')
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">

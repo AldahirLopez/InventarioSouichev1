@@ -93,29 +93,28 @@ class ObrasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $obra = Obras::findOrFail($id);
-
         // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required',
             'direccion' => 'required',
-            'estacionservicio' => 'required',
+            'estacionservicio' => 'required|numeric',
         ]);
-    
-        // Actualizar los valores de los campos
-        $obra->nombre = $request->nombre;
-        $obra->direccion = $request->direccion;
-        $obra->estacionservicio = $request->estacionservicio;
-    
-        // Guardar los cambios en la base de datos
-        $obra->save();
-    
-        // Redirigir a la vista de índice de obras (o a donde desees después de la actualización)
-        $obras = Obras::paginate(5);
-        return view('obras.index', compact('obras'));
-    
-    }
 
+        // Buscar la obra por su ID y actualizar los datos
+        $obra = Obras::findOrFail($id);
+        $obra->update([
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion,
+            'estacionservicio' => $request->estacionservicio,
+            // Aquí puedes añadir más campos que necesites actualizar
+        ]);
+
+        // Agregar el mensaje de éxito a la sesión
+        session()->flash('success', 'La obra ha sido actualizada exitosamente');
+
+        // Redirigir a la vista de edición de la obra
+        return redirect()->route('obras.index', ['obra' => $obra->id]);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -126,10 +125,10 @@ class ObrasController extends Controller
     {
         // Buscar la obra por su ID
         $obra = Obras::findOrFail($id);
-    
+
         // Eliminar la obra
         $obra->delete();
-    
+
         // Redirigir a la vista de índice de obras (o a donde desees después de la eliminación)
         $obras = Obras::paginate(5);
         return view('obras.index', compact('obras'));
