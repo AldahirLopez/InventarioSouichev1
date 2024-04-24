@@ -24,6 +24,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4 col-xl-4">
+                                <div class="card bg-c-blue order-card">
+                                    <div class="card-block">
+                                        <h5>Documentos Legales</h5>
+                                        @php
+                                        $cant_planos = Planos::where('obra_id', $obra->id)->count(); // Contar los planos relacionados con la obra específica
+                                        @endphp
+                                        <h2 class="text-right"><i class="fa-solid fa-map f-left"></i><span>{{$cant_planos}}</span></h2>
+                                        <p class="m-b-0 text-right"><a href="{{ route('planos.index', ['obra_id' => $obra->id]) }}" class="text-white">Ver más</a></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

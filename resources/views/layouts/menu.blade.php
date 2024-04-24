@@ -3,11 +3,6 @@
     <i class="fas fa-house"></i><span>Dashboard</span>
     </a>
 
-    <a class="nav-link {{ Request::is('categorias') ? 'active' : '' }}" href="/categorias">
-    <i class="fas fa-bars"></i><span>Categorias</span>
-    </a>
-
-
     <a class="nav-link {{ Request::is('obras') ? 'active' : '' }}" href="/obras">
         <i class="fas fa-building"></i><span>Obras</span>     
     </a>
