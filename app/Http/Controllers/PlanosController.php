@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Planos;
 use App\Models\Obras;
+use App\Models\User;
 
 class PlanosController extends Controller
 {
@@ -29,7 +30,6 @@ class PlanosController extends Controller
         $obraId = $request->obra_id; // Obtener la obra por su ID
         return view('planos.crear', compact('obraId'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -86,21 +86,61 @@ class PlanosController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function edit($id)
     {
+        // Busca el plano por su ID
+        $plano = Planos::findOrFail($id);
+
+        // Retorna la vista del formulario de edición con los datos del plano y de la obra
+        return view('planos.editar', compact('plano'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $id 
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'archivo' => 'file', // El archivo es opcional en la actualización
+        ]);
+    
+        // Buscar el plano por su ID
+        $plano = Planos::findOrFail($id);
+    
+        // Actualizar los campos
+        $plano->nombre = $request->nombre;
+        $plano->descripcion = $request->descripcion;
+    
+        // Verificar si se proporcionó un nuevo archivo
+        if ($request->hasFile('archivo')) {
+            // Obtener la ruta del archivo anterior
+            $rutaArchivoAnterior = storage_path('app/public/' . $plano->rutaplano);
+    
+            // Verificar si el archivo anterior existe y eliminarlo
+            if (file_exists($rutaArchivoAnterior)) {
+                unlink($rutaArchivoAnterior); // Eliminar el archivo anterior del sistema de archivos
+            }
+    
+            // Guardar el nuevo archivo en el sistema de archivos
+            $archivoSubido = $request->file('archivo');
+            $rutaArchivoNuevo = $archivoSubido->store('public/archivos');
+            $plano->rutaplano = str_replace('public/', '', $rutaArchivoNuevo); // Actualizar la ruta del archivo en la base de datos
+        }
+    
+        // Guardar los cambios en la base de datos
+        $plano->save();
+    
+        // Redirigir al usuario a la página de lista de planos
+        return redirect()->route('planos.index', ['obra_id' => $plano->obra_id])->with('success', 'Plano actualizado exitosamente');
     }
 
     /**
@@ -111,7 +151,24 @@ class PlanosController extends Controller
      */
     public function destroy($id)
     {
+        // Buscar el plano por su ID
+        $plano = Planos::findOrFail($id);
+    
+        // Obtener la ruta del archivo asociado al plano
+        $rutaArchivo = storage_path('app/public/' . $plano->rutaplano);
+    
+        // Verificar si el archivo existe y eliminarlo
+        if (file_exists($rutaArchivo)) {
+            unlink($rutaArchivo); // Eliminar el archivo del sistema de archivos
+        }
+    
+        // Eliminar el plano de la base de datos
+        $plano->delete();
+    
+        // Redirigir al usuario a la página de lista de planos
+        return redirect()->route('planos.index', ['obra_id' => $plano->obra_id])->with('success', 'Plano eliminado exitosamente');
     }
+
 
     public function mostrarPDF($contenidoPDF)
     {

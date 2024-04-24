@@ -41,14 +41,13 @@
                                         <button onclick="mostrarPDF('{{ $plano->rutaplano }}')">Mostrar PDF</button>
                                     </td>
                                     <td>{{ $plano->descripcion }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $plano->usuario->name }}</td>
+                                    <td>{{ $obra->estacionservicio }}</td>
                                     <td>
                                         <form action="{{ route('planos.destroy',$plano->id) }}" method="POST">
                                             @can('editar-planos')
-                                            <a class="btn btn-info" href="{{ route('planos.edit',$plano->id) }}">Editar</a>
+                                            <a class="btn btn-info" href="{{ route('planos.edit', ['plano' => $plano->id]) }}">Editar</a>
                                             @endcan
-
                                             @csrf
                                             @method('DELETE')
                                             @can('borrar-planos')

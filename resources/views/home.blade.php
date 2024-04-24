@@ -44,12 +44,12 @@
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-blue order-card">
                                     <div class="card-block">
-                                        <h5>Planos</h5>
+                                        <h5>Obras</h5>
                                         @php
                                         use App\Models\Obras;
-                                        $cant_obras = Obras::count();
+                                        $cant_obras = Obras::count(); 
                                         @endphp
-                                        <h2 class="text-right"><i class="fa-solid fa-map f-left"></i><span>{{$cant_obras}}</span></h2>
+                                        <h2 class="text-right"><i class="fa-solid fa-person-digging f-left"></i><span>{{$cant_obras}}</span></h2>
                                         <p class="m-b-0 text-right"><a href="/obras" class="text-white">Ver más</a></p>
                                     </div>
                                 </div>

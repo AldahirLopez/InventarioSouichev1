@@ -23,22 +23,22 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('planos.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="obra_id" value="{{ $obraId }}">
+                        <form action="{{ route('planos.update', $plano->id) }}" method="POST" enctype="multipart/form-data">
 
+                            @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="nombre">Nombre del Plano</label>
-                                        <input type="text" name="nombre" class="form-control">
+                                        <input type="text" name="nombre" class="form-control" value="{{ $plano->nombre }}">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="descripcion">Descripcion</label>
-                                        <input type="text" name="descripcion" class="form-control">
+                                        <input type="text" name="descripcion" class="form-control" value="{{ $plano->descripcion }}">
                                     </div>
                                 </div>
 
@@ -49,12 +49,13 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <a href="javascript:window.history.back()" class="btn btn-danger">Regresar</a>
+                                    <a href="{{ route('planos.index', ['obra_id' => $plano->obra_id]) }}" class="btn btn-danger">Regresar</a>
                                     <button type="submit" class="btn btn-primary">Guardar</button>
                                 </div>
                             </div>
                     </div>
                     </form>
+
                 </div>
             </div>
         </div>
