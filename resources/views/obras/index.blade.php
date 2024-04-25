@@ -5,13 +5,15 @@
     <div class="section-header">
         <h3 class="page__heading">Obras</h3>
     </div>
+
     <div class="section-body">
-    @include('layouts.bannernotification')
+        @include('layouts.bannernotification')
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
 
+                        <a href="{{ route('home') }}" class="btn btn-danger">Regresar</a>
 
                         @can('crear-obras')
                         <a class="btn btn-warning" href="{{ route('obras.create') }}">Nuevo</a>

@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Planos de la obra {{ $obra->nombre }}</h3>
+        <h3 class="page__heading">Documentos de la obra {{ $obra->nombre }}</h3>
     </div>
     <div class="section-body">
         <!-- Agregar el código para mostrar el mensaje de éxito aquí -->
@@ -18,9 +18,9 @@
                     <div class="card-body">
 
                         <a href="javascript:window.history.back()" class="btn btn-danger">Regresar</a>
-                        
-                        @can('crear-planos')
-                        <a class="btn btn-warning" href="{{ route('planos.create', ['obra_id' => $obra->id]) }}">Nuevo</a>
+
+                        @can('crear-documentos')
+                        <a class="btn btn-warning" href="{{ route('documentos.create', ['obra_id' => $obra->id]) }}">Nuevo</a>
                         @endcan
 
                         <table class="table table-striped mt-2">
@@ -34,24 +34,24 @@
                                 <th style="color:#fff;">Acciones</th>
                             </thead>
                             <tbody>
-                                @foreach ($planos as $plano)
+                                @foreach ($documentos as $doc)
                                 <tr>
-                                    <td style="display: none;">{{ $plano->id }}</td>
-                                    <td>{{ $plano->nombre }}</td>
+                                    <td style="display: none;">{{ $doc->id }}</td>
+                                    <td>{{ $doc->nombre }}</td>
                                     <td>
-                                        <button onclick="mostrarPDF('{{ $plano->rutaplano }}')">Mostrar PDF</button>
+                                        <button onclick="mostrarPDF('{{ $doc->rutadoc }}')">Mostrar PDF</button>
                                     </td>
-                                    <td>{{ $plano->descripcion }}</td>
-                                    <td>{{ $plano->usuario->name }}</td>
-                                    <td>{{ $obra->estacionservicio }}</td>
+                                    <td>{{ $doc->descripcion }}</td>
+                                    <td>{{ $doc->usuario->name }}</td>
+                                    <td>{{ $doc->estacionservicio }}</td>
                                     <td>
-                                        <form action="{{ route('planos.destroy',$plano->id) }}" method="POST">
-                                            @can('editar-planos')
-                                            <a class="btn btn-info" href="{{ route('planos.edit', ['plano' => $plano->id]) }}">Editar</a>
+                                        <form action="{{ route('documentos.destroy',$doc->id) }}" method="POST">
+                                            @can('editar-documentos')
+                                            <a class="btn btn-info" href="{{ route('documentos.edit', ['documento' => $doc->id]) }}">Editar</a>
                                             @endcan
                                             @csrf
                                             @method('DELETE')
-                                            @can('borrar-planos')
+                                            @can('borrar-documentos')
                                             <button type="submit" class="btn btn-danger">Borrar</button>
                                             @endcan
                                         </form>
@@ -63,7 +63,7 @@
 
                         <!-- Ubicamos la paginacion a la derecha -->
                         <div class="pagination justify-content-end">
-                            {!! $planos->appends(['obra_id' => $obra->id])->links() !!}
+                            {!! $documentos->appends(['obra_id' => $obra->id])->links() !!}
                         </div>
                     </div>
                 </div>

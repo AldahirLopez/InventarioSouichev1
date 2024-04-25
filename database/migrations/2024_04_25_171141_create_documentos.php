@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('planos', function (Blueprint $table) {
+        Schema::create('documentos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('rutaplano');
+            $table->string('rutadoc');
             $table->string('descripcion');
             $table->unsignedBigInteger('usuario_id'); // Agregar columna usuario_id
             $table->unsignedBigInteger('obra_id'); // Agregar columna obra_id
@@ -27,7 +27,6 @@ return new class extends Migration
     
             // Definir la relación con la tabla users (usuarios)
             $table->foreign('usuario_id')->references('id')->on('users');
-            
         });
     }
 
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('planos');
+        Schema::dropIfExists('documentoslegales');
     }
 };

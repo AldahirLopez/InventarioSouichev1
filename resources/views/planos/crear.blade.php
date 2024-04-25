@@ -49,8 +49,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <a href="javascript:window.history.back()" class="btn btn-danger">Regresar</a>
                                     <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <a href="javascript:window.history.back()" class="btn btn-danger">Regresar</a>
                                 </div>
                             </div>
                     </div>

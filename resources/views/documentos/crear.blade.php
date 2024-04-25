@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Agregar una Obra</h3>
+        <h3 class="page__heading">Agregar una Documento</h3>
     </div>
     <div class="section-body">
         <div class="row">
@@ -23,27 +23,29 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('obras.store') }}" method="POST">
+                        <form action="{{ route('documentos.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="obra_id" value="{{ $obraId }}">
+
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="nombre">Nombre</label>
+                                        <label for="nombre">Nombre del documento</label>
                                         <input type="text" name="nombre" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="direccion">Direccion</label>
-                                        <input type="text" name="direccion" class="form-control">
+                                        <label for="descripcion">Descripcion</label>
+                                        <input type="text" name="descripcion" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="estacionservicio">Numero Estacion</label>
-                                        <input type="text" name="estacionservicio" class="form-control">
+                                        <label for="archivo">Archivo (PDF, WORD, EXCEL)</label>
+                                        <input type="file" name="archivo" class="form-control-file">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -53,7 +55,6 @@
                             </div>
                     </div>
                     </form>
-
                 </div>
             </div>
         </div>

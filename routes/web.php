@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ObrasController;
 use App\Http\Controllers\ObrasInfoController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\DocumentosLController;
 use App\Http\Controllers\SalidasController;
 use App\Http\Controllers\EntradasController;
 use App\Http\Controllers\PlanosController;
@@ -36,6 +37,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/mostrar-pdf/{contenidoPDF}', 'PlanoController@mostrarPDF')->name('mostrar-pdf');
 
+Route::get('/mostrar-pdf/{contenidoPDF}', 'DocumentosController@mostrarPDF')->name('mostrar-pdf');
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('roles', RolController::class);
@@ -47,6 +49,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('categorias', CategoriasController::class);
     Route::resource('entradas', EntradasController::class);
     Route::resource('planos', PlanosController::class);
+    Route::resource('documentos', DocumentosLController::class);
 });
 
 
