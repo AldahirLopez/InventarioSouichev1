@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <a href="{{ route('home') }}" class="btn btn-danger">Regresar</a>
+                        <a href="{{ route('home') }}" class="btn btn-danger">Home</a>
 
                         @can('crear-obras')
                         <a class="btn btn-warning" href="{{ route('obras.create') }}">Nuevo</a>
@@ -24,7 +24,7 @@
                                 <th style="display: none;">ID</th>
                                 <th style="color:#fff;">Nombre</th>
                                 <th style="color:#fff;">Direccion</th>
-                                <th style="color:#fff;">N. Estacion</th>
+                                <th style="color:#fff;">Informacion</th>
                                 <th style="color:#fff;">Acciones</th>
                             </thead>
                             <tbody>
