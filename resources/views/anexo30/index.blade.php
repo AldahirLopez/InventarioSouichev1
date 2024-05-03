@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Planos de la obra {{ $obra->nombre }}</h3>
+        <h3 class="page__heading">Documentos de anexo 30 de la obra {{ $obra->nombre }}</h3>
     </div>
     <div class="section-body">
         <!-- Agregar el código para mostrar el mensaje de éxito aquí -->
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body"> 
+                    <div class="card-body">
 
                         <a href="javascript:window.history.back()" class="btn btn-danger">Regresar</a>
                         

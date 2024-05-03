@@ -5,12 +5,12 @@
     <div class="section-header">
         <h3 class="page__heading">Obras</h3>
     </div>
-
     <div class="section-body">
         @include('layouts.bannernotification')
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+
                     <div class="card-body">
 
                         <a href="{{ route('home') }}" class="btn btn-danger">Home</a>
@@ -41,7 +41,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="{{ route('obras.destroy',$obra->id) }}" method="POST">
+                                        <form id="delete-form-{{ $obra->id }}" action="{{ route('obras.destroy',$obra->id) }}" method="POST">
                                             @can('editar-obras')
                                             <a class="btn btn-info" href="{{ route('obras.edit',$obra->id) }}">Editar</a>
                                             @endcan
@@ -49,7 +49,7 @@
                                             @csrf
                                             @method('DELETE')
                                             @can('borrar-obras')
-                                            <button type="submit" class="btn btn-danger">Borrar</button>
+                                            <button type="button" class="btn btn-danger delete-btn" data-id="{{ $obra->id }}">Borrar</button>
                                             @endcan
                                         </form>
                                     </td>
@@ -68,4 +68,23 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const id = this.getAttribute('data-id');
+                const form = document.querySelector(`#delete-form-${id}`);
+
+                if (confirm('¿Estás seguro de que deseas eliminar esta obra?')) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
 @endsection
