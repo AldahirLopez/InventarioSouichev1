@@ -43,12 +43,13 @@
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-blue order-card">
                                     <div class="card-block">
-                                        <h5>Anexo 30</h5>
+                                        <h5>Operacion y Mantenimiento</h5>
                                         @php
-                                        $cant_documentos = Documentos::where('obra_id', $obra->id)->count(); // Contar los documentos relacionados con la obra específica
+                                        use App\Models\Operacion;
+                                        $cant_operacion = Operacion::where('obra_id', $obra->id)->count(); // Contar los documentos relacionados con la obra específica
                                         @endphp
-                                        <h2 class="text-right"><i class="fa-solid fa-folder-open f-left"></i><span>{{$cant_documentos}}</span></h2>
-                                        <p class="m-b-0 text-right"><a href="{{ route('documentos.index', ['obra_id' => $obra->id]) }}" class="text-white">Ver más</a></p>
+                                        <h2 class="text-right"><i class="fa-solid fa-folder-open f-left"></i><span>{{$cant_operacion}}</span></h2>
+                                        <p class="m-b-0 text-right"><a href="{{ route('operacion.index', ['obra_id' => $obra->id]) }}" class="text-white">Ver más</a></p>
                                     </div>
                                 </div>
                             </div>

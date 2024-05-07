@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\DocumentosLController;
 use App\Http\Controllers\SalidasController;
 use App\Http\Controllers\EntradasController;
+use App\Http\Controllers\OperacionController;
 use App\Http\Controllers\PlanosController;
 
 /*
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('entradas', EntradasController::class);
     Route::resource('planos', PlanosController::class);
     Route::resource('documentos', DocumentosLController::class);
+    Route::resource('operacion', OperacionController::class);
 });
 
 

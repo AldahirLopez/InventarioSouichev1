@@ -7,6 +7,10 @@
         <i class="fas fa-building"></i><span>Obras</span>     
     </a>
 
+    <a class="nav-link {{ Request::is('operacion') ? 'active' : '' }}" href="/operacion">
+        <i class="fas fa-building"></i><span>Operacion y Mantenimiento</span>     
+    </a>
+
     <a class="nav-link {{ Request::is('usuarios') ? 'active' : '' }}" href="/usuarios">
         <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>
