@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArmoniaController;
 use Illuminate\Support\Facades\Route;
 
 //Agregamos los controladores 
@@ -15,6 +16,7 @@ use App\Http\Controllers\SalidasController;
 use App\Http\Controllers\EntradasController;
 use App\Http\Controllers\OperacionController;
 use App\Http\Controllers\PlanosController;
+use App\Http\Controllers\SouichiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,10 @@ use App\Http\Controllers\PlanosController;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::middleware('auth')->get('/select', function () {
+    return view('select');
+})->name('select');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
@@ -40,7 +46,7 @@ Route::get('/mostrar-pdf/{contenidoPDF}', 'PlanoController@mostrarPDF')->name('m
 
 Route::get('/mostrar-pdf/{contenidoPDF}', 'DocumentosController@mostrarPDF')->name('mostrar-pdf');
 
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('productos', ProductosController::class);
@@ -52,7 +58,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('planos', PlanosController::class);
     Route::resource('documentos', DocumentosLController::class);
     Route::resource('operacion', OperacionController::class);
+    Route::resource('armonia', ArmoniaController::class);
+    Route::resource('souichi', SouichiController::class);
 });
-
-
-

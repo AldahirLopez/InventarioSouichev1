@@ -30,7 +30,7 @@ class OperacionController extends Controller
         $usuario = auth()->user();
 
         // Pasar el usuario a la vista
-        return view('operacion.index', ['usuario' => $usuario]);
+        return view('armonia.operacion.index', ['usuario' => $usuario]);
     }
     /**
      * Show the form for creating a new resource.
