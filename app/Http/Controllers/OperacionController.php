@@ -13,9 +13,9 @@ class OperacionController extends Controller
     function __construct()
     {
         $this -> middleware('permission:ver-operacion|crear-operacion|editar-operacion|borrar-operacion',['only' => ['index'] ]);
-        $this -> middleware('permission:crear-rol', ['only' => ['create','store'] ]);
-        $this -> middleware('permission:editar-rol',['only' => ['edit', 'update'] ]);
-        $this -> middleware('permission:borrar-rol',['only' => ['destroy'] ]);
+        $this -> middleware('permission:crear-operacion', ['only' => ['create','store'] ]);
+        $this -> middleware('permission:editar-operacion',['only' => ['edit', 'update'] ]);
+        $this -> middleware('permission:borrar-operacion',['only' => ['destroy'] ]);
     }
     /**
      * Display a listing of the resource.
@@ -39,6 +39,10 @@ class OperacionController extends Controller
      */
     public function create(Request $request)
     {
+        $usuario = auth()->user();
+
+        // Pasar el usuario a la vista
+        return view('armonia.operacion.index', ['usuario' => $usuario]);
     }
     /**
      * Store a newly created resource in storage.

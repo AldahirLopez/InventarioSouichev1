@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchivosController;
 use App\Http\Controllers\ArmoniaController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ use App\Http\Controllers\EntradasController;
 use App\Http\Controllers\OperacionController;
 use App\Http\Controllers\PlanosController;
 use App\Http\Controllers\SouichiController;
+use App\Http\Controllers\DictamenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,4 +62,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('operacion', OperacionController::class);
     Route::resource('armonia', ArmoniaController::class);
     Route::resource('souichi', SouichiController::class);
+    Route::resource('dictamen', DictamenController::class);
+    Route::resource('archivos', ArchivosController::class);
 });
