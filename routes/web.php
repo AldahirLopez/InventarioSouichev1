@@ -48,6 +48,8 @@ Route::get('/mostrar-pdf/{contenidoPDF}', 'PlanoController@mostrarPDF')->name('m
 
 Route::get('/mostrar-pdf/{contenidoPDF}', 'DocumentosController@mostrarPDF')->name('mostrar-pdf');
 
+Route::post('/usuarios/{id}/updateProfile', [UsuarioController::class, 'updateProfile'])->name('usuarios.updateProfile');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);

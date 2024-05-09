@@ -137,4 +137,27 @@ class UsuarioController extends Controller
         User::find($id)->delete();
         return redirect()->route('usuarios.index');
     }
+
+    public function updateProfile(Request $request, $id)
+{
+    // Validación de los datos del formulario
+    $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $id,
+        //'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Asegura que la foto sea una imagen válida
+    ]);
+
+    // Obtención del usuario
+    $user = User::find($id);
+
+    // Actualización del nombre
+    $user->name = $request->input('name');
+
+    // Actualización del correo electrónico
+    $user->email = $request->input('email');
+
+    // Guardar los cambios en la base de datos
+    $user->save();
+}
+
 }
