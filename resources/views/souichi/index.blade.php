@@ -3,67 +3,53 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Dashboard</h3>
+        <h3 class="page__heading">Souichi Mexico SA de CV</h3>
     </div>
     <div class="section-body">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-
-                            <div class="col-md-4 col-xl-4">
-                                <div class="card bg-c-blue order-card">
-                                    <div class="card-block">
-                                        <h5>Usuarios</h5>
-                                        @php
-                                        use App\Models\User;
-                                        $cant_usuarios = User::count();
-                                        @endphp
-                                        <h2 class="text-right"><i class="fa fa-users f-left"></i><span>{{$cant_usuarios}}</span></h2>
-                                        <p class="m-b-0 text-right"><a href="/usuarios" class="text-white">Ver más</a></p>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4 col-xl-4">
-                                <div class="card bg-c-green order-card">
-                                    <div class="card-block">
-                                        <h5>Roles</h5>
-                                        @php
-                                        use Spatie\Permission\Models\Role;
-                                        $cant_roles = Role::count();
-                                        @endphp
-                                        <h2 class="text-right"><i class="fa fa-user-lock f-left"></i><span>{{$cant_roles}}</span></h2>
-                                        <p class="m-b-0 text-right"><a href="/roles" class="text-white">Ver más</a></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-xl-4">
-                                <div class="card bg-c-blue order-card">
-                                    <div class="card-block">
-                                        <h5>Obras</h5>
-                                        @php
-                                        use App\Models\Obras;
-                                        $cant_obras = Obras::count(); 
-                                        @endphp
-                                        <h2 class="text-right"><i class="fa-solid fa-person-digging f-left"></i><span>{{$cant_obras}}</span></h2>
-                                        <p class="m-b-0 text-right"><a href="/obras" class="text-white">Ver más</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
+            @if(Auth::user()->hasRole('Administrador'))
+            <div class="col-md-4 col-xl-4">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h5>Usuarios</h5>
+                        @php
+                        $cant_usuarios = \App\Models\User::count();
+                        @endphp
+                        <h2 class="text-right"><i class="fa fa-users f-left"></i><span>{{$cant_usuarios}}</span></h2>
+                        <p class="m-b-0 text-right"><a href="/usuarios" class="text-white">Ver más</a></p>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-xl-4">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h5>Roles</h5>
+                        @php
+                        $cant_roles = \Spatie\Permission\Models\Role::count();
+                        @endphp
+                        <h2 class="text-right"><i class="fa fa-user-lock f-left"></i><span>{{$cant_roles}}</span></h2>
+                        <p class="m-b-0 text-right"><a href="/roles" class="text-white">Ver más</a></p>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            @if( $opcion == 'souichi' || Auth::user()->hasRole('Administrador'))
+            <div class="col-md-4 col-xl-4">
+                <div class="card order-card" style="background-color: #495057;">
+                    <div class="card-block">
+                        <h5>Obras</h5>
+                        @php
+                        $cant_obras = \App\Models\Obras::count();
+                        @endphp
+                        <h2 class="text-right"><i class="fa-solid fa-person-digging f-left"></i><span>{{$cant_obras}}</span></h2>
+                        <p class="m-b-0 text-right"><a href="/obras" class="text-white">Ver más</a></p>
+                    </div>
+                </div>
+            </div>
+            @endif
+
         </div>
-    </div>
-    </div>
-    </div>
     </div>
 </section>
 @endsection

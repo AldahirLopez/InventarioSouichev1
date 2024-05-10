@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Obras;
+use App\Models\Planos;
 
 class ObrasController extends Controller
 {
 
     function __construct()
     {
-        $this -> middleware('permission:ver-obras|crear-obras|editar-obras|borrar-obras',['only' => ['index'] ]);
-        $this -> middleware('permission:crear-obras', ['only' => ['create','store'] ]);
-        $this -> middleware('permission:editar-obras',['only' => ['edit', 'update'] ]);
-        $this -> middleware('permission:borrar-obras',['only' => ['destroy'] ]);
+        $this->middleware('permission:ver-obras|crear-obras|editar-obras|borrar-obras', ['only' => ['index']]);
+        $this->middleware('permission:crear-obras', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-obras', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-obras', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +24,8 @@ class ObrasController extends Controller
     public function index()
     {
         $obras = Obras::paginate(5);
-        return view('obras.index', compact('obras'));
+        $opcion = "souichi";
+        return view('obras.index', compact('obras', 'opcion'));
     }
 
     /**
@@ -33,7 +35,8 @@ class ObrasController extends Controller
      */
     public function create()
     {
-        return view('obras.crear');
+        $opcion = "souichi";
+        return view('obras.crear', compact('opcion'));
     }
 
     /**
@@ -61,9 +64,9 @@ class ObrasController extends Controller
 
         // Guardar la nueva entrada en la base de datos
         $obra->save();
-
+        $opcion = "souichi";
         $obras = Obras::paginate(5);
-        return view('obras.index', compact('obras'));
+        return view('obras.index', compact('obras','opcion'));
     }
 
     /**
@@ -85,11 +88,12 @@ class ObrasController extends Controller
      */
     public function edit($id)
     {
+        $opcion = "souichi";
         // Busca la obra por su ID
         $obra = Obras::findOrFail($id);
 
         // Retorna la vista del formulario de edición con los datos de la obra
-        return view('obras.editar', compact('obra'));
+        return view('obras.editar', compact('obra', 'opcion'));
     }
 
     /**
@@ -119,9 +123,9 @@ class ObrasController extends Controller
 
         // Agregar el mensaje de éxito a la sesión
         session()->flash('success', 'La obra ha sido actualizada exitosamente');
-
+        $opcion = "souichi";
         // Redirigir a la vista de edición de la obra
-        return redirect()->route('obras.index', ['obra' => $obra->id]);
+        return redirect()->route('obras.index', ['obra' => $obra->id,'obra' => $opcion]);
     }
     /**
      * Remove the specified resource from storage.
@@ -134,11 +138,29 @@ class ObrasController extends Controller
         // Buscar la obra por su ID
         $obra = Obras::findOrFail($id);
 
+        // Obtener los planos asociados a la obra
+        $planos = $obra->planos;
+
+        // Eliminar los archivos y los registros de los planos asociados
+        foreach ($planos as $plano) {
+            // Obtener la ruta del archivo asociado al plano
+            $rutaArchivo = storage_path('app/public/' . $plano->rutaplano);
+
+            // Verificar si el archivo existe y eliminarlo
+            if (file_exists($rutaArchivo)) {
+                unlink($rutaArchivo); // Eliminar el archivo del sistema de archivos
+            }
+
+            // Eliminar el plano de la base de datos
+            $plano->delete();
+        }
+
         // Eliminar la obra
         $obra->delete();
 
         // Redirigir a la vista de índice de obras (o a donde desees después de la eliminación)
         $obras = Obras::paginate(5);
-        return view('obras.index', compact('obras'));
+        $opcion = "souichi";
+        return view('obras.index', compact('obras', 'opcion'));
     }
 }

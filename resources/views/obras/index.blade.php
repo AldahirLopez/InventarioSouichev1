@@ -16,11 +16,11 @@
                         <a href="{{ route('home') }}" class="btn btn-danger">Home</a>
 
                         @can('crear-obras')
-                        <a class="btn btn-warning" href="{{ route('obras.create') }}">Nuevo</a>
+                        <a class="btn btn-success" href="{{ route('obras.create') }}">Nuevo</a>
                         @endcan
 
                         <table class="table table-striped mt-2">
-                            <thead style="background-color:#6777ef">
+                            <thead style="background-color: #495057;"> 
                                 <th style="display: none;">ID</th>
                                 <th style="color:#fff;">Nombre</th>
                                 <th style="color:#fff;">Direccion</th>
@@ -43,7 +43,7 @@
                                     <td>
                                         <form id="delete-form-{{ $obra->id }}" action="{{ route('obras.destroy',$obra->id) }}" method="POST">
                                             @can('editar-obras')
-                                            <a class="btn btn-info" href="{{ route('obras.edit',$obra->id) }}">Editar</a>
+                                            <a class="btn btn-success" href="{{ route('obras.edit',$obra->id) }}">Editar</a>
                                             @endcan
 
                                             @csrf

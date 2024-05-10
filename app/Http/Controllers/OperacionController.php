@@ -12,10 +12,10 @@ class OperacionController extends Controller
 
     function __construct()
     {
-        $this -> middleware('permission:ver-operacion|crear-operacion|editar-operacion|borrar-operacion',['only' => ['index'] ]);
-        $this -> middleware('permission:crear-operacion', ['only' => ['create','store'] ]);
-        $this -> middleware('permission:editar-operacion',['only' => ['edit', 'update'] ]);
-        $this -> middleware('permission:borrar-operacion',['only' => ['destroy'] ]);
+        $this->middleware('permission:ver-operacion|crear-operacion|editar-operacion|borrar-operacion', ['only' => ['index']]);
+        $this->middleware('permission:crear-operacion', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-operacion', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-operacion', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -28,9 +28,9 @@ class OperacionController extends Controller
         // Obtener los dictamenes de Operacion y mantenimiento
         // Obtener el usuario autenticado actualmente
         $usuario = auth()->user();
-
+        $opcion = "armonia";
         // Pasar el usuario a la vista
-        return view('armonia.operacion.index', ['usuario' => $usuario]);
+        return view('armonia.operacion.index', ['usuario' => $usuario, 'opcion' => $opcion]);
     }
     /**
      * Show the form for creating a new resource.
@@ -40,9 +40,9 @@ class OperacionController extends Controller
     public function create(Request $request)
     {
         $usuario = auth()->user();
-
+        $opcion = "armonia";
         // Pasar el usuario a la vista
-        return view('armonia.operacion.index', ['usuario' => $usuario]);
+        return view('armonia.operacion.index', ['usuario' => $usuario, 'opcion' => $opcion]);
     }
     /**
      * Store a newly created resource in storage.

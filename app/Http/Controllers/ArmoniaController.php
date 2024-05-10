@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorias;
 use Illuminate\Http\Request;
 use App\Models\Productos;
+
 class ArmoniaController extends Controller
 {
     /**
@@ -12,9 +13,10 @@ class ArmoniaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { 
-       return view('armonia.index');
+    public function index(Request $request)
+    {
+        $opcion = "armonia";
+        return view('armonia.index')->with('opcion', $opcion);
     }
 
 
@@ -22,10 +24,9 @@ class ArmoniaController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function create()
     {
-
     }
 
     /**
@@ -36,8 +37,6 @@ class ArmoniaController extends Controller
      */
     public function store(Request $request)
     {
-
-
     }
 
     /**
@@ -59,7 +58,6 @@ class ArmoniaController extends Controller
      */
     public function edit(Productos $producto)
     {
-
     }
 
     /**
@@ -71,7 +69,6 @@ class ArmoniaController extends Controller
      */
     public function update(Request $request, Productos $producto)
     {
-
     }
 
     /**
@@ -82,7 +79,5 @@ class ArmoniaController extends Controller
      */
     public function destroy(Productos $producto)
     {
-
     }
-
 }

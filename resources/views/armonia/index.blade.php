@@ -1,4 +1,4 @@
-@extends('livewire-layout1')
+@extends('livewire-layout')
 
 @section('content')
 <section class="section">
@@ -7,7 +7,7 @@
     </div>
     <div class="section-body">
         <div class="row">
-            @if(Auth::user()->hasRole('Administrador'))
+            @if(Auth::user()->hasRole('Administrador')) 
             <div class="col-md-4 col-xl-4">
                 <div class="card bg-c-blue order-card">
                     <div class="card-block">
@@ -32,6 +32,9 @@
                     </div>
                 </div>
             </div>
+            @endif
+
+            @if( $opcion == 'souichi' || Auth::user()->hasRole('Administrador'))
             <div class="col-md-4 col-xl-4">
                 <div class="card bg-c-blue order-card">
                     <div class="card-block">
@@ -45,6 +48,7 @@
                 </div>
             </div>
             @endif
+            
         </div>
     </div>
 </section>

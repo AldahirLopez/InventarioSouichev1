@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Obras extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre','direccion','estacionservicio'];
-
+    protected $fillable = ['nombre', 'direccion', 'estacionservicio'];
+    public function planos()
+    {
+        return $this->hasMany(Planos::class, 'obra_id');
+    }
 }
-

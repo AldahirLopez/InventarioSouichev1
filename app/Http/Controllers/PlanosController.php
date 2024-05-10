@@ -18,7 +18,8 @@ class PlanosController extends Controller
     {
         $planos = Planos::where('obra_id', $request->obra_id)->paginate(5);
         $obra = Obras::findOrFail($request->obra_id); // Obtener la obra relacionada con los planos
-        return view('planos.index', compact('planos', 'obra'));
+        $opcion = "souichi";
+        return view('planos.index', compact('planos', 'obra','opcion'));
     }
     /**
      * Show the form for creating a new resource.
@@ -28,7 +29,8 @@ class PlanosController extends Controller
     public function create(Request $request)
     {
         $obraId = $request->obra_id; // Obtener la obra por su ID
-        return view('planos.crear', compact('obraId'));
+        $opcion = "souichi";
+        return view('planos.crear', compact('obraId','opcion'));
     }
     /**
      * Store a newly created resource in storage.
@@ -92,9 +94,9 @@ class PlanosController extends Controller
     {
         // Busca el plano por su ID
         $plano = Planos::findOrFail($id);
-
+        $opcion = "souichi";
         // Retorna la vista del formulario de edición con los datos del plano y de la obra
-        return view('planos.editar', compact('plano'));
+        return view('planos.editar', compact('plano','opcion'));
     }
 
     /**

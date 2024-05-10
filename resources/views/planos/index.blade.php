@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-body"> 
 
-                        <a href="javascript:window.history.back()" class="btn btn-danger">Regresar</a>
+                        <a href="{{ route('obras.index')}}" class="btn btn-danger">Regresar</a>
                         
                         @can('crear-planos')
                         <a class="btn btn-warning" href="{{ route('planos.create', ['obra_id' => $obra->id]) }}">Nuevo</a>

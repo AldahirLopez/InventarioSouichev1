@@ -25,7 +25,7 @@ class ArchivosController extends Controller
 
         // Obtener el usuario autenticado actualmente
         $usuario = auth()->user();
-
+        $opcion = "armonia";
         // Obtener los archivos relacionados con el dictamen y el usuario logueado
         $archivos = Archivos::where('dictamen_id', $dictamen_id)
             ->where('usuario_id', $usuario->id)
@@ -35,7 +35,8 @@ class ArchivosController extends Controller
         return view('armonia.archivos.index', [
             'usuario' => $usuario,
             'archivos' => $archivos,
-            'dictamen_id' => $dictamen_id
+            'dictamen_id' => $dictamen_id,
+            'opcion' => $opcion
         ]);
     }
 
@@ -54,9 +55,9 @@ class ArchivosController extends Controller
 
         // Obtener el dictamen_id de la solicitud (si se pasó)
         $dictamen_id = $request->dictamen_id;
-
+        $opcion = "armonia";
         // Pasar el usuario y el dictamen_id a la vista
-        return view('armonia.archivos.crear', compact('usuario', 'dictamen_id'));
+        return view('armonia.archivos.crear', compact('usuario', 'dictamen_id', 'opcion'));
     }
 
     /**

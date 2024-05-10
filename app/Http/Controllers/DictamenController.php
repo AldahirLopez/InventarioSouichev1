@@ -26,8 +26,9 @@ class DictamenController extends Controller
 
         // Obtener los dictamenes
         $dictamenes = Dictamen::paginate(5);
+        $opcion = "armonia";
         // Pasar el usuario y los dictámenes paginados a la vista
-        return view('armonia.dictamen.index', ['usuario' => $usuario, 'dictamenes' => $dictamenes]);
+        return view('armonia.dictamen.index', ['usuario' => $usuario, 'dictamenes' => $dictamenes, 'opcion' => $opcion]);
     }
 
 
@@ -40,7 +41,8 @@ class DictamenController extends Controller
     {
         // Obtener el usuario autenticado actualmente
         $usuario = auth()->user();
-        return view('armonia.dictamen.crear', compact('usuario'));
+        $opcion = "armonia";
+        return view('armonia.dictamen.crear', compact('usuario','opcion'));
     }
 
     /**

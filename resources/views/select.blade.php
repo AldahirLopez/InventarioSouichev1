@@ -8,7 +8,7 @@ Razon Social
 
         @auth
         <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" style="color: black;">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" style="color: white;">
                 <div class="d-sm-none d-lg-inline-block">
                     Hola, {{ \Illuminate\Support\Facades\Auth::user()->name}}</div>
             </a>
@@ -43,7 +43,7 @@ Razon Social
         </li>
         @endauth
     </ul>
-    <div class="section-header text-center"> <!-- Agrega la clase 'text-center' para centrar -->
+    <div class="section-header text-center text-white" style="background-color: #495057;"> <!-- Agrega la clase 'text-center' para centrar -->
         <h3 class="page__heading">Seleccione una razon social</h3>
     </div>
 

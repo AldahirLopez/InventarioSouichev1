@@ -16,7 +16,8 @@ class ObrasInfoController extends Controller
     {
         $id = request('id');
         $obra = Obras::findOrFail($id);
-        return view('obras-info.index', ['obra' => $obra]);
+        $opcion = "souichi";
+        return view('obras-info.index', ['obra' => $obra, 'opcion' => $opcion]);
     }
 
     /**
@@ -26,7 +27,7 @@ class ObrasInfoController extends Controller
      */
     public function create()
     {
-    } 
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,7 +56,7 @@ class ObrasInfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { 
+    {
     }
 
     /**

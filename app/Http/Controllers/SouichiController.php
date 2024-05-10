@@ -14,7 +14,8 @@ class SouichiController extends Controller
      */
     public function index()
     { 
-       return view('souichi.index');
+        $opcion = "souichi";
+        return view('souichi.index')->with('opcion', $opcion);
     }
 
 
